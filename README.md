@@ -7,7 +7,7 @@ The scanning engine is not open source. It is a native Rust library that is ship
 
 ## Features
 
-- Full device scan
+• Full device scan
 
 • APK analysis
 
@@ -40,7 +40,7 @@ The scanning engine is not open source. It is a native Rust library that is ship
 
 ## What is not open source
 
-- The Rust scanning engine
+• The Rust scanning engine
 
 • VXPack signature data
 
