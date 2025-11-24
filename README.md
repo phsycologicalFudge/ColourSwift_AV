@@ -1,16 +1,9 @@
 # ColourSwift Security
+<img src="https://github.com/user-attachments/assets/65938060-807c-4630-ba5a-ea7d35d51ed8" width="150" alt="logo">
 
-ColourSwift Security is an open source antivirus client for Android.
-The client is written in Flutter and provides a complete UI for scanning files, managing results, and interacting with the ColourSwift ecosystem.
+ColourSwift Security is an open source antivirus client for Android. The client is written in Flutter and provides a complete UI for scanning files, managing results, and interacting with the ColourSwift ecosystem.
 
-The scanning engine is not open source.
-The engine is a native Rust library that is shipped in compiled form.
-The client loads it at runtime through FFI.
-The engine handles signature matching, bloom filter checks, ML scoring and file analysis.
-
-This repository contains the full client source code.
-It can be built and inspected by anyone.
-The engine and cloud backend are private and remain separate.
+The scanning engine is not open source. It is a native Rust library that is shipped only in compiled form, and the client loads it at runtime through FFI. The engine is responsible for signature matching, bloom filter checks, ML scoring and file analysis. This repository contains the complete client source code, which can be built and inspected by anyone, while the engine and cloud backend remain private and separate.
 
 ## Features
 
