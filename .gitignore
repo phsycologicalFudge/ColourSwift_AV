@@ -1,0 +1,47 @@
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+pubspec.lock
+build/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+
+# Android builds
+**/android/**/build/
+**/build/
+
+# Gradle
+.gradle/
+gradle/
+local.properties
+
+# Signing keys
+*.jks
+*.keystore
+key.properties
+local-signing.properties
+
+# VS Code
+.vscode/
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Generated files
+generated/
+
+# sponsors file
+lib/private/

@@ -4,10 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../services/meta_password_service.dart';
-import '../../services/purchase_service.dart';
 import '../../services/theme_manager.dart';
 import '../about/how_this_app_works.dart';
 import 'package:flutter/services.dart';
+import '../../services/purchase_service.dart'
+if (dart.library.io) '../../private/purchase_service.dart';
+
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

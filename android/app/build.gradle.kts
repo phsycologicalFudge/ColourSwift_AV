@@ -7,10 +7,11 @@ plugins {
 import java.util.Properties
         import java.io.FileInputStream
 
-val keystorePropertiesFile = rootProject.file("key.properties")
-val keystoreProperties = Properties()
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+        def localSigningFile = rootProject.file("local-signing.properties")
+def hasLocalSigning = localSigningFile.exists()
+def localSigningProps = new Properties()
+if (hasLocalSigning) {
+    localSigningProps.load(new FileInputStream(localSigningFile))
 }
 
 android {
@@ -36,11 +37,13 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String?
-            keyPassword = keystoreProperties["keyPassword"] as String?
-            storeFile = file(keystoreProperties["storeFile"] as String?)
-            storePassword = keystoreProperties["storePassword"] as String?
+        if (hasLocalSigning) {
+            create("release") {
+                keyAlias = localSigningProps["keyAlias"]
+                keyPassword = localSigningProps["keyPassword"]
+                storeFile = file(localSigningProps["storeFile"])
+                storePassword = localSigningProps["storePassword"]
+            }
         }
     }
 
@@ -48,7 +51,10 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             isShrinkResources = false
-            signingConfig = signingConfigs.getByName("release")
+
+            if (hasLocalSigning) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 }
