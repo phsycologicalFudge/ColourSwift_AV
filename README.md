@@ -29,59 +29,59 @@ The engine supports deep scanning of the following file types:
 
 Binary formats
 
-APK
+• APK
 
-EXE, DLL, MSI
+• EXE, DLL, MSI
 
-DEX, JAR, COM, BIN
+• DEX, JAR, COM, BIN
 
-Shared libraries: SO (Android), ELF (Linux)
+• Shared libraries: SO (Android), ELF (Linux)
 
 Archives
 
-ZIP
+• ZIP
 
-APK (treated as ZIP)
+• APK (treated as ZIP)
 
-Nested ZIP/APK (up to 2 levels deep)
+• Nested ZIP/APK (up to 2 levels deep)
 
 Documents & Scripting
 
-TXT, LOG, CFG, INI
+• TXT, LOG, CFG, INI
 
-JSON, XML, HTML, CSS, JS
+• JSON, XML, HTML, CSS, JS
 
-MD, CSV, TSV, RTF, YAML
+• MD, CSV, TSV, RTF, YAML
 
-DOC, DOCX (scanned as binary)
+• DOC, DOCX (scanned as binary)
 
-BAT, PS1, VBS
+• BAT, PS1, VBS
 
 APK internals
 
-classes.dex
+• classes.dex
 
-lib/*.so
+• lib/*.so
 
-assets/*
+• assets/*
 
-res/raw/*
+• res/raw/*
 
-Other embedded resources
+• Other embedded resources
 
 Skipped File Types
 
 Some formats are skipped to avoid false positives and unnecessary I/O:
 
-RAR (not supported)
+• RAR (not supported yet)
 
-PNG, JPG, JPEG, GIF, WEBP
+• PNG, JPG, JPEG, GIF, WEBP
 
-MP4, MKV, AVI, MP3, OGG
+• MP4, MKV, AVI, MP3, OGG
 
-TTF, OTF, WOFF, WOFF2
+• TTF, OTF, WOFF, WOFF2
 
-PDF
+• PDF
 
 
 ## What is open source
