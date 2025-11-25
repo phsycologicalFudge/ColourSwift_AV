@@ -7,8 +7,8 @@ import '../../services/meta_password_service.dart';
 import '../../services/theme_manager.dart';
 import '../about/how_this_app_works.dart';
 import 'package:flutter/services.dart';
-import '../../services/purchase_service.dart'
-if (dart.library.io) '../../private/purchase_service.dart';
+import '../../services/purchase_service.dart';
+
 
 
 class SettingsScreen extends StatefulWidget {
@@ -51,7 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Upgrade to Pro'),
+          title: const Text('Become a sponsor? (Pro)'),
           content: const Text(
             'Pro is cosmetic only. You get Emerald and Grey themes, icon switching, and visual tweaks. Scans and protection are the same for everyone.',
           ),
@@ -485,7 +485,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                         onPressed: _showUpgradeDialog,
                         child: const Text(
-                          'Upgrade to Pro (£2.99)',
+                          'Become a sponsor',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

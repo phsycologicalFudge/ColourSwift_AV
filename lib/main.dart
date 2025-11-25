@@ -5,8 +5,9 @@ import 'services/theme_manager.dart';
 import 'screens/boot_screen.dart';
 import 'screens/quarantine/quarantine_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:colourswift_av/services/purchase_service.dart'
-if (dart.library.io) 'package:colourswift_av/private/purchase_service.dart';
+import 'package:colourswift_av/services/purchase_service.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
