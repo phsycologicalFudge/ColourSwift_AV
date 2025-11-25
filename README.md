@@ -168,7 +168,9 @@ No IP addresses or identifiers are stored as Cloudflare tunnels hide incoming IP
 
 No user information is logged or retained.
 
+
 ## Community
 
 You can join the official Discord for updates and support.
-Links are provided in the app and Github page
+https://discord.gg/VYubQJfcYM
+
