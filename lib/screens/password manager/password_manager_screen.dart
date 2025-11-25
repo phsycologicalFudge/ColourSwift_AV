@@ -753,7 +753,7 @@ class _PasswordManagerScreenState extends State<PasswordTestScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: Center(
                   child: Text(
-                    'powered by ColourSwift AV+',
+                    'powered by ColourSwift AV',
                     style: text.bodySmall?.copyWith(
                       fontSize: 11,
                       color: text.bodySmall?.color?.withOpacity(0.4),

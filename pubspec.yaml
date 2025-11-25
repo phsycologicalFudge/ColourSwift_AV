@@ -1,7 +1,7 @@
 name: colourswift_av
-description: ColourSwift AV+ - standalone antivirus suite using the Rust engine.
+description: CS Security - standalone antivirus suite using the Rust engine.
 publish_to: "none"
-version: 2.0.2+11492
+version: 2.0.2+11493
 environment:
   sdk: ">=3.0.0 <4.0.0"
 

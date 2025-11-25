@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'ColourSwift AV+',
+      title: 'CS Security',
       theme: themeManager.themeData,
       themeMode: themeManager.themeMode,
       home: openQuarantine ? const QuarantineScreen() : const BootScreen(),

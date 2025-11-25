@@ -27,7 +27,7 @@ class HowThisAppWorksScreen extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           children: [
             Text(
-              'How ColourSwift AV+ Works',
+              'How CS Security Works',
               style: text.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: theme.colorScheme.primary,
@@ -35,7 +35,7 @@ class HowThisAppWorksScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              'ColourSwift AV+ is a privacy-first antivirus engine that scans your files locally without tracking or sending data anywhere. '
+              'CS Security is a privacy-first antivirus engine that scans your files locally without tracking or sending data anywhere. '
                   'It uses a custom Rust-based engine and an encrypted malware database, ensuring security and speed while staying completely offline.',
               style: text.bodyMedium,
             ),

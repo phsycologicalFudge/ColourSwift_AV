@@ -15,7 +15,6 @@ if (hasLocalSigning) {
     localSigningProps.load(FileInputStream(localSigningFile))
 }
 
-
 android {
     namespace = "com.colourswift.cssecurity"
     compileSdk = 36
@@ -48,7 +47,6 @@ android {
             }
         }
     }
-
 
     buildTypes {
         getByName("release") {

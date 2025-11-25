@@ -35,7 +35,7 @@ class MainActivity : FlutterActivity() {
                 when (call.method) {
                     "startService" -> {
                         val args = call.arguments as? Map<*, *>
-                        val title = args?.get("title") as? String ?: "ColourSwift AV+"
+                        val title = args?.get("title") as? String ?: "CS Security"
                         val text = args?.get("text") as? String ?: "Realtime protection active"
                         startForegroundServiceCompat(title, text)
                         result.success(true)
@@ -48,7 +48,7 @@ class MainActivity : FlutterActivity() {
 
                     "showNotification" -> {
                         val args = call.arguments as? Map<*, *>
-                        val title = args?.get("title") as? String ?: "ColourSwift AV+"
+                        val title = args?.get("title") as? String ?: "CS Security"
                         val text = args?.get("text") as? String ?: ""
                         showNotification(title, text)
                         result.success(true)
