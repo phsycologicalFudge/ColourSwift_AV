@@ -125,7 +125,7 @@ Requirements
 
 • Android Studio or command line build tools
 
-• Java 17
+• Java 11
 
 • Git
 
