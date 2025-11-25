@@ -7,12 +7,14 @@ plugins {
 import java.util.Properties
         import java.io.FileInputStream
 
-        def localSigningFile = rootProject.file("local-signing.properties")
-def hasLocalSigning = localSigningFile.exists()
-def localSigningProps = new Properties()
+val localSigningFile = rootProject.file("local-signing.properties")
+val hasLocalSigning = localSigningFile.exists()
+
+val localSigningProps = Properties()
 if (hasLocalSigning) {
-    localSigningProps.load(new FileInputStream(localSigningFile))
+    localSigningProps.load(FileInputStream(localSigningFile))
 }
+
 
 android {
     namespace = "com.colourswift.cssecurity"
@@ -37,15 +39,16 @@ android {
     }
 
     signingConfigs {
-        if (hasLocalSigning) {
-            create("release") {
-                keyAlias = localSigningProps["keyAlias"]
-                keyPassword = localSigningProps["keyPassword"]
-                storeFile = file(localSigningProps["storeFile"])
-                storePassword = localSigningProps["storePassword"]
+        create("release") {
+            if (hasLocalSigning) {
+                keyAlias = localSigningProps["keyAlias"] as String
+                keyPassword = localSigningProps["keyPassword"] as String
+                storeFile = file(localSigningProps["storeFile"] as String)
+                storePassword = localSigningProps["storePassword"] as String
             }
         }
     }
+
 
     buildTypes {
         getByName("release") {
