@@ -105,15 +105,6 @@ Some formats are skipped to avoid false positives and unnecessary I/O:
 
 • VXPack signature data
 
-• ML classifier internals
-
-• Cloud backend and scoring logic
-
-• Builder pipelines
-
-• Hash ingestion and dataset tools
-
-• Attestation and server logic
 
 The engine is provided as prebuilt `.so` files inside the jniLibs folder.
 
