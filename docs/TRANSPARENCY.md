@@ -51,7 +51,7 @@ If a function does not appear in the FFI bridge, the engine cannot call it.
 
 FFI bridge source code:
 
-**[FFI Bridge](lib/widgets/antivirus_bridge.dart)**
+**[FFI Bridge](../lib/widgets/antivirus_bridge.dart)**
 
 Through FFI, researchers can audit every native function used:
 
@@ -95,4 +95,5 @@ Even with cloud-assisted scanning enabled:
 - file metadata
 
 are transmitted. Files, device id and IP addresses are never uploaded.
+
 
