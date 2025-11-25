@@ -23,6 +23,67 @@ The scanning engine is not open source. It is a native Rust library that is ship
 
 • ColourSwift ecosystem compatibility
 
+## Supported File Types (ColourSwift AV Engine)
+
+The engine supports deep scanning of the following file types:
+
+Binary formats
+
+APK
+
+EXE, DLL, MSI
+
+DEX, JAR, COM, BIN
+
+Shared libraries: SO (Android), ELF (Linux)
+
+Archives
+
+ZIP
+
+APK (treated as ZIP)
+
+Nested ZIP/APK (up to 2 levels deep)
+
+Documents & Scripting
+
+TXT, LOG, CFG, INI
+
+JSON, XML, HTML, CSS, JS
+
+MD, CSV, TSV, RTF, YAML
+
+DOC, DOCX (scanned as binary)
+
+BAT, PS1, VBS
+
+APK internals
+
+classes.dex
+
+lib/*.so
+
+assets/*
+
+res/raw/*
+
+Other embedded resources
+
+Skipped File Types
+
+Some formats are skipped to avoid false positives and unnecessary I/O:
+
+RAR (not supported)
+
+PNG, JPG, JPEG, GIF, WEBP
+
+MP4, MKV, AVI, MP3, OGG
+
+TTF, OTF, WOFF, WOFF2
+
+PDF
+
+
 ## What is open source
 
 - Flutter UI
