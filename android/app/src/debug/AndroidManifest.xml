@@ -1,15 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.colourswift.cssecurity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <application>
-        <activity
-            android:name="com.colourswift.cssecurity.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    <application tools:node="merge">
+
+        <!-- Remove the Bird icon alias entirely in debug builds -->
+        <activity-alias
+            android:name=".IconBirdAlias"
+            tools:node="remove" />
+
+        <!-- Ensure the default alias stays (no launcher duplication) -->
+        <activity-alias
+            android:name=".IconDefaultAlias"
+            tools:node="merge" />
+
     </application>
 
 </manifest>
