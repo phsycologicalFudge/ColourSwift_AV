@@ -38,7 +38,10 @@
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />
-            flutter build apk --split-per-abi
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter> <!-- Remove intent filter before building -->
         </activity>
         <receiver
             android:name=".BootReceiver"

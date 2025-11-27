@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
+import 'package:crypto/crypto.dart';
 import '../../services/quarantine_service.dart';
+import '../../services/exclusion_service.dart';
 
 class QuarantineScreen extends StatefulWidget {
   const QuarantineScreen({super.key});
@@ -77,6 +80,7 @@ class _QuarantineScreenState extends State<QuarantineScreen> {
             actions: [
               IconButton(icon: const Icon(Icons.select_all_rounded), onPressed: _toggleAll),
               IconButton(icon: const Icon(Icons.refresh_rounded), onPressed: _reload),
+
             ],
           ),
           body: loading
@@ -145,6 +149,21 @@ class _QuarantineScreenState extends State<QuarantineScreen> {
                             ),
                           ],
                         ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.block, color: Colors.orange),
+                        onPressed: () async {
+                          final bytes = File(orig).readAsBytesSync();
+                          final sha = sha256.convert(bytes).toString();
+                          final x = ExclusionService();
+                          await x.load();
+                          await x.addSha(sha);
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Added to exclusions')),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

@@ -3,12 +3,10 @@
 
     <application tools:node="merge">
 
-        <!-- Remove the Bird icon alias entirely in debug builds -->
         <activity-alias
             android:name=".IconBirdAlias"
             tools:node="remove" />
 
-        <!-- Ensure the default alias stays (no launcher duplication) -->
         <activity-alias
             android:name=".IconDefaultAlias"
             tools:node="merge" />
@@ -16,3 +14,10 @@
     </application>
 
 </manifest>
+
+    <!-- insert this after line 40 of main manifest:
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+    </intent-filter>
+    -->

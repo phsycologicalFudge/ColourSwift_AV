@@ -11,8 +11,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/cache_manager.dart';
 import '../services/cloud_helper_service.dart';
+import '../services/exclusion_service.dart';
 import '../services/quarantine_service.dart';
 import '../widgets/antivirus_bridge.dart';
+import 'exclusions/exclusion_manager_screen.dart';
 
 class LogBuffer {
   static final List<String> _messages = [];
@@ -158,6 +160,66 @@ class _ScanScreenState extends State<ScanScreen>
 
   Future<Map<String, String>> _hashFile(String path) async {
     return await compute(_hashFileIsolate, path);
+  }
+
+  void _openExclusionPopup() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+      ),
+      builder: (_) {
+        return SizedBox(
+          height: 240,
+          child: Column(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.folder_open),
+                title: const Text('Exclude a Folder'),
+                onTap: () async {
+                  Navigator.pop(context);
+                  final r = await FilePicker.platform.getDirectoryPath();
+                  if (r != null) {
+                    final x = ExclusionService();
+                    await x.load();
+                    await x.addFolder(r);
+                  }
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.file_copy),
+                title: const Text('Exclude a File'),
+                onTap: () async {
+                  Navigator.pop(context);
+                  final r = await FilePicker.platform.pickFiles();
+                  if (r != null && r.files.isNotEmpty) {
+                    final p = r.files.single.path!;
+                    final bytes = File(p).readAsBytesSync();
+                    final sha = sha256.convert(bytes).toString();
+                    final x = ExclusionService();
+                    await x.load();
+                    await x.addSha(sha);
+                  }
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.list_alt),
+                title: const Text('See Exclusion List'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ExclusionManagerScreen(),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _safeScrollToEnd() {
@@ -335,6 +397,9 @@ class _ScanScreenState extends State<ScanScreen>
         if (await dir.exists()) {
           await for (final e in dir.list(recursive: true, followLinks: false)) {
             if (e is File) {
+              final x = ExclusionService();
+              await x.load();
+              if (x.skipFolder(e.path)) continue;
               final ext = _ext(e.path);
               if (!_isImage(ext)) files.add(e.path);
             }
@@ -366,6 +431,9 @@ class _ScanScreenState extends State<ScanScreen>
         await for (final entity in dir.list(recursive: true, followLinks: false)) {
           if (entity is File) {
             try {
+              final x = ExclusionService();
+              await x.load();
+              if (x.skipFolder(entity.path)) continue;
               final ext = _ext(entity.path);
               final size = await entity.length();
               if (_isAllowedFile(ext, size)) allPaths.add(entity.path);
@@ -462,7 +530,12 @@ class _ScanScreenState extends State<ScanScreen>
         if (!mounted || cancelled) return;
 
         final path = files[i];
+        final ex = ExclusionService();
+        await ex.load();
+        if (ex.skipFolder(path)) continue;
         final name = path.split('/').last;
+        final sha = sha256.convert(File(path).readAsBytesSync()).toString();
+        if (ex.skipSha(sha)) continue;
 
         setState(() {
           currentFile = name;
@@ -551,8 +624,8 @@ class _ScanScreenState extends State<ScanScreen>
   }
 
   static bool _isAllowedFile(String ext, int size) {
-    const allowed = ['apk', 'zip', 'rar', 'pdf', 'txt', 'md', 'pdf'];
-    const skip = ['mp3', 'mp4', 'm4a', 'mov', 'jpg', 'png', '7z', 'exe'];
+    const allowed = ['apk', 'zip', 'pdf', 'txt', 'md', 'pdf', 'exe'];
+    const skip = ['mp3', 'rar', 'mp4', 'm4a', 'mov', 'jpg', 'jpeg', 'png', '7z'];
     return allowed.contains(ext) && !skip.contains(ext) && size < 100 * 1024 * 1024;
   }
 
@@ -630,6 +703,12 @@ class _ScanScreenState extends State<ScanScreen>
         centerTitle: true,
         backgroundColor: theme.appBarTheme.backgroundColor,
       ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: _openExclusionPopup,
+        child: const Icon(Icons.rule_folder_rounded),
+      ),
+
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: AnimatedSwitcher(
@@ -681,7 +760,7 @@ class _ScanScreenState extends State<ScanScreen>
       const SizedBox(height: 10),
       Center(
         child: Text(
-          'Engine Ready • v2.0.0',
+          'Engine Ready • VX-Titanium-005',
           style: text.bodySmall?.copyWith(color: Colors.grey.shade600),
         ),
       ),
