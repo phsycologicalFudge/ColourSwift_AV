@@ -91,7 +91,7 @@ class _ExclusionManagerScreenState extends State<ExclusionManagerScreen> {
               );
             }).toList(),
           const SizedBox(height: 20),
-          Text('File Hashes', style: text.titleMedium),
+          Text('Files', style: text.titleMedium),
           const SizedBox(height: 10),
           if (shas.isEmpty)
             Text('None', style: text.bodySmall)
