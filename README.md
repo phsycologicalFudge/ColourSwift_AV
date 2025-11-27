@@ -23,7 +23,7 @@ The scanning engine (VX-Titanium) is not open source. It is a native Rust librar
 
 • ColourSwift ecosystem compatibility
 
-## Supported File Types (ColourSwift AV Engine)
+## Supported File Types (VX-Titanium engine)
 
 The engine supports deep scanning of the following file types:
 
