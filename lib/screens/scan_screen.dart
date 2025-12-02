@@ -760,7 +760,7 @@ class _ScanScreenState extends State<ScanScreen>
       const SizedBox(height: 10),
       Center(
         child: Text(
-          'Engine Ready • VX-Titanium-005',
+          'Engine Ready • VX-TITANIUM-v6',
           style: text.bodySmall?.copyWith(color: Colors.grey.shade600),
         ),
       ),
