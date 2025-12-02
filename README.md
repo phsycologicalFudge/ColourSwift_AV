@@ -174,3 +174,6 @@ No user information is logged or retained.
 You can join the official Discord for updates and support.
 https://discord.gg/VYubQJfcYM
 
+Reddit:
+https://www.reddit.com/r/AndroidMalwareLabs/s/gv85ss1P5S
+
