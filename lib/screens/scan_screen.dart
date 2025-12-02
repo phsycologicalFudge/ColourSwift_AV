@@ -906,31 +906,51 @@ class _ScanScreenState extends State<ScanScreen>
 
     if (mode == ScanMode.single && singleResult != null) {
       final safe = !singleResult!;
-      final resColor = safe ? Colors.greenAccent : Colors.redAccent;
+
       return SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _glowIcon(
-              safe ? Icons.verified_user_rounded : Icons.warning_amber_rounded,
-              resColor,
-            ),
-            const SizedBox(height: 20),
-            Text(
-              safe ? 'File is Clean' : 'Threats Detected',
-              style: text.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: resColor,
+
+            if (safe) ...[
+              Icon(Icons.verified_rounded, size: 60, color: Colors.greenAccent),
+              const SizedBox(height: 20),
+              Text(
+                'No threats found',
+                style: text.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.greenAccent,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              currentFile,
-              style: text.bodySmall?.copyWith(color: Colors.grey),
-            ),
-            const SizedBox(height: 30),
-            _returnButtons(),
+              const SizedBox(height: 8),
+              Text(
+                currentFile,
+                style: text.bodySmall?.copyWith(color: Colors.grey),
+              ),
+              const SizedBox(height: 30),
+              _returnButtons(),
+            ],
+
+            if (!safe) ...[
+              Icon(Icons.warning_amber_rounded, size: 60, color: Colors.orangeAccent),
+              const SizedBox(height: 20),
+              Text(
+                'Suspicious file quarantined',
+                style: text.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orangeAccent,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                currentFile,
+                style: text.bodySmall?.copyWith(color: Colors.grey),
+              ),
+              const SizedBox(height: 30),
+              _returnButtons(),
+            ],
+
           ],
         ),
       );
@@ -952,36 +972,127 @@ class _ScanScreenState extends State<ScanScreen>
             ),
           ),
           const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Clean: ${clean.length}',
-                style: text.bodyMedium?.copyWith(color: Colors.greenAccent),
-              ),
-              const SizedBox(width: 15),
-              Text(
-                'Suspicious: ${infected.length}',
-                style: text.bodyMedium?.copyWith(color: Colors.orangeAccent),
-              ),
-            ],
-          ),
+
+          // Counts only shown if needed
+          if (infected.isNotEmpty) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Suspicious: ${infected.length}',
+                  style: text.bodyMedium?.copyWith(color: Colors.orangeAccent),
+                ),
+              ],
+            ),
+          ],
+
+          if (infected.isEmpty) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Clean: ${clean.length}',
+                  style: text.bodyMedium?.copyWith(color: Colors.greenAccent),
+                ),
+              ],
+            ),
+          ],
+
           const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: _fileColumn('Clean Files', Colors.greenAccent, clean),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: _fileColumn(
-                  'Potentially Dangerous',
-                  Colors.orangeAccent,
-                  infected,
+
+          if (infected.isEmpty) ...[
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.greenAccent.withOpacity(0.4),
+                  width: 1,
                 ),
               ),
-            ],
-          ),
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Icon(Icons.verified_rounded, size: 40, color: Colors.greenAccent),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Your files look safe',
+                    style: text.titleMedium?.copyWith(color: Colors.greenAccent),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${clean.length} files scanned with no threats found.',
+                    style: text.bodySmall?.copyWith(color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+          ] else ...[
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.orangeAccent.withOpacity(0.4),
+                  width: 1,
+                ),
+              ),
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.warning_amber_rounded,
+                          size: 40, color: Colors.orangeAccent),
+                      const SizedBox(width: 12),
+                      Text(
+                        '${infected.length} suspicious file(s)',
+                        style: text.titleMedium?.copyWith(
+                          color: Colors.orangeAccent,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'These files have been moved to quarantine.',
+                    style: text.bodySmall?.copyWith(color: Colors.grey),
+                  ),
+                  const SizedBox(height: 20),
+
+                  SizedBox(
+                    height: 240,
+                    child: ListView.builder(
+                      itemCount: infected.length,
+                      itemBuilder: (context, i) {
+                        final name = infected[i].split('/').last;
+                        return ListTile(
+                          dense: true,
+                          leading: Icon(
+                            Icons.shield_rounded,
+                            size: 20,
+                            color: Colors.orangeAccent,
+                          ),
+                          title: Text(
+                            name,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+
           const SizedBox(height: 20),
           _returnButtons(),
         ],

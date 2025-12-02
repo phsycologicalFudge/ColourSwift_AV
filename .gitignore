@@ -45,3 +45,4 @@ generated/
 
 # sponsors file
 lib/private/
+/android/.kotlin/sessions

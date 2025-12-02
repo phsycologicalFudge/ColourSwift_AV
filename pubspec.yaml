@@ -1,7 +1,7 @@
 name: colourswift_av
 description: CS Security - antivirus suite
 publish_to: "none"
-version: 2.0.4+11494
+version: 2.0.4+11495
 environment:
   sdk: ">=3.0.0 <4.0.0"
 

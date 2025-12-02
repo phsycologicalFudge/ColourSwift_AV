@@ -76,7 +76,7 @@ class _QuarantineScreenState extends State<QuarantineScreen> {
       children: [
         Scaffold(
           appBar: AppBar(
-            title: const Text('Quarantine'),
+            title: const Text('Removed'),
             actions: [
               IconButton(icon: const Icon(Icons.select_all_rounded), onPressed: _toggleAll),
               IconButton(icon: const Icon(Icons.refresh_rounded), onPressed: _reload),
@@ -86,7 +86,7 @@ class _QuarantineScreenState extends State<QuarantineScreen> {
           body: loading
               ? const Center(child: CircularProgressIndicator())
               : items.isEmpty
-              ? Center(child: Text('No quarantined files', style: text.bodyMedium?.copyWith(color: text.bodyMedium?.color?.withOpacity(0.7))))
+              ? Center(child: Text('No Removed files', style: text.bodyMedium?.copyWith(color: text.bodyMedium?.color?.withOpacity(0.7))))
               : ListView.separated(
             padding: const EdgeInsets.all(16),
             itemCount: items.length,
