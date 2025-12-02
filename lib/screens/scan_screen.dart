@@ -697,7 +697,7 @@ class _ScanScreenState extends State<ScanScreen>
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text(
-          'Full Device Scan',
+          'File scanner',
           style: text.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
