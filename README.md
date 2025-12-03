@@ -5,6 +5,8 @@ ColourSwift Security is an open source antivirus client for Android. The client 
 
 The scanning engine (VX-Titanium) is not open source. It is a native Rust library that is shipped only in compiled form, and the client loads it at runtime through FFI. The engine is responsible for signature matching, bloom filter checks, ML scoring and file analysis. This repository contains the complete client source code, which can be built and inspected by anyone, while the engine and cloud backend remain private and separate.
 
+The app periodically recieves updates for hashes and signitures via the vxpack: https://github.com/phsycologicalFudge/AVDatabase
+
 ## Features
 
 • Full device scan
